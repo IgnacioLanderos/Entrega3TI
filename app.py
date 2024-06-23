@@ -66,7 +66,8 @@ def create_app():
     @app.route('/messages', methods=['GET'])
     def get_messages():
         messages = Message.query.all()
-        return jsonify([message.data for message in messages]), 200
+        message_dicts = [message.to_dict() for message in messages]
+        return jsonify(message_dicts), 200
 
     return app
 
